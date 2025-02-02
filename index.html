@@ -16,25 +16,6 @@
             color: #ffffff;
             overflow: hidden;
             position: relative;
-            box-sizing: border-box;
-        }
-
-        .lights {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 10%, rgba(255, 0, 150, 0.4) 50%, rgba(255, 255, 255, 0.1) 90%);
-            animation: glow 10s infinite alternate;
-            z-index: -1;
-        }
-
-        @keyframes glow {
-            0% { opacity: 0.2; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.2); }
-            100% { opacity: 1; transform: scale(1.5); }
         }
 
         .container {
@@ -44,10 +25,6 @@
             justify-content: center;
             align-items: center;
             transition: all 1s ease-in-out;
-            border: 3px solid rgba(255, 0, 150, 0.6);
-            border-radius: 20px;
-            box-shadow: 0 0 20px rgba(255, 0, 150, 0.8);
-            padding: 20px;
             opacity: 0;
             animation: fadeIn 1s forwards;
             position: relative;
@@ -63,14 +40,8 @@
             font-size: 3.5em;
             font-family: 'Lobster', cursive;
             text-shadow: 4px 4px 10px rgba(255, 255, 255, 0.7);
-            animation: neonGlow 1.5s infinite alternate;
             color: #ff3399;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 0, 150, 0.8);
-        }
-
-        @keyframes neonGlow {
-            from { text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 0, 150, 0.8); }
-            to { text-shadow: 0 0 15px rgba(255, 255, 255, 1), 0 0 25px rgba(255, 0, 150, 1); }
         }
 
         p {
@@ -84,21 +55,8 @@
         .arrow {
             font-size: 3em;
             cursor: pointer;
-            animation: bounce 1s infinite alternate, glow 1.5s infinite alternate;
             color: #ff4e50;
         }
-
-        @keyframes bounce {
-            from { transform: translateY(0); }
-            to { transform: translateY(10px); }
-        }
-
-        @keyframes glow {
-            from { text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 15px rgba(255, 0, 150, 0.8); }
-            to { text-shadow: 0 0 20px rgba(255, 255, 255, 1), 0 0 25px rgba(255, 0, 150, 1); }
-        }
-
-        .hidden { display: none; }
 
         button {
             background: linear-gradient(45deg, #ff416c, #ff4e50);
@@ -118,6 +76,9 @@
             box-shadow: 0px 8px 20px rgba(255, 78, 80, 0.6);
         }
 
+        .hidden { display: none; }
+
+        /* Lluvia de corazones */
         @keyframes heartsFall {
             0% { transform: translateY(-100px); opacity: 1; }
             100% { transform: translateY(100vh); opacity: 0; }
@@ -131,7 +92,6 @@
             animation-timing-function: linear;
         }
 
-        /* Varias clases para corazones */
         .heart1 { color: #ff3399; font-size: 2em; }
         .heart2 { color: #ff66cc; font-size: 2.5em; }
         .heart3 { color: #ff99cc; font-size: 3em; }
@@ -176,31 +136,50 @@
         .bottom-right { bottom: 10%; right: 5%; transform: translate(0, 0); }
         .top-center { top: 5%; left: 50%; transform: translateX(-50%); }
         .bottom-center { bottom: 5%; left: 50%; transform: translateX(-50%); }
+
+        /* Estilos para la nueva página de la canción */
+        .song-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
     </style>
 </head>
 <body>
     <div class="lights"></div>
 
-    <div class="container" id="page1">
+    <!-- Página para iniciar la canción -->
+    <div class="song-page" id="songPage">
+        <h1>🎶 Iniciar canción 🎶</h1>
+        <button onclick="startSong()">Iniciar Canción</button>
+        <audio id="musicPlayer" class="hidden" controls autoplay loop>
+            <source src="Tú ya Conoces Esta CANCIÓN tan linda_ Samba Paixão - Murart ft. RevnaAMVLetra sub Español.mp3" type="audio/mpeg">
+            <source src="Tú ya Conoces Esta CANCIÓN tan linda_ Samba Paixão - Murart ft. RevnaAMVLetra sub Español.ogv" type="audio/ogg">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+    </div>
+
+    <!-- Primer Página -->
+    <div class="container hidden" id="page1">
         <h1>✨ Te Adoro, mi niña linda ✨</h1>
         <p>No sabes lo mucho que te amo. Siempre alegras mis días y los vuelves increíbles.</p>
         <div class="arrow" onclick="showNext()">⬇</div>
     </div>
 
+    <!-- Segunda Página -->
     <div class="container hidden" id="page2">
         <h1>💖 Por eso te vengo a preguntar... 💖</h1>
         <h2 style="color: #ff4e50; font-size: 2.5em; text-shadow: 3px 3px 10px rgba(255, 78, 80, 0.5); font-family: 'Lobster', cursive;">¿Quieres ser mi San Valentín? 💘</h2>
         <button onclick="showFinal()">Sí (No se acepta un no como respuesta) 💖</button>
     </div>
 
+    <!-- Página Final -->
     <div class="container hidden final" id="finalPage">
         <h1>✨ Soy muy afortunado de tenerte en mi vida ✨</h1>
         <p>No sabes lo mucho que te quiero. Eres una de las cosas más lindas que me han pasado y siempre agradeceré al destino por ponerte en mi camino.</p>
         <p>💖 Te amo, mi princesa linda. Nunca dudes de eso. 💖</p>
-        <audio autoplay loop>
-            <source src="https://voca.ro/1b5dEOmPMpNz" type="audio/mpeg">
-            Tu navegador no soporta el elemento de audio.
-        </audio>
     </div>
 
     <div id="phrases" class="hearts-container"></div>
@@ -217,6 +196,15 @@
             "Mi bonita",
             "Mi Niña"
         ];
+
+        // Función para iniciar la canción
+        function startSong() {
+            document.getElementById('musicPlayer').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('songPage').classList.add('hidden');
+                document.getElementById('page1').classList.remove('hidden');
+            }, 500);
+        }
 
         function showNext() {
             document.getElementById('page1').classList.add('hidden');
@@ -241,41 +229,26 @@
             document.body.appendChild(heartsContainer);
 
             for (let i = 0; i < heartCount; i++) {
-                let heart = document.createElement('div');
-                heart.classList.add('heart');
-                heart.classList.add('heart' + (Math.floor(Math.random() * 8) + 1));
-                heart.innerHTML = ['❤️', '💖', '💘', '💕', '💞', '💓'][Math.floor(Math.random() * 6)];
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.animationDuration = Math.random() * 5 + 5 + 's';
+                const heart = document.createElement('div');
+                heart.classList.add('heart', 'heart' + (Math.floor(Math.random() * 8) + 1));
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = Math.random() * 3 + 2 + 's';
                 heartsContainer.appendChild(heart);
             }
         }
 
         function startPhrases() {
-            let usedPhrases = [];
-
-            function showPhrase() {
-                if (usedPhrases.length === phrases.length) {
-                    usedPhrases = [];
-                }
-                let randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
-                while (usedPhrases.includes(randomPhrase)) {
-                    randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
-                }
-                usedPhrases.push(randomPhrase);
-
-                let randomPos = ['top-left', 'top-right', 'bottom-left', 'bottom-right', 'top-center', 'bottom-center'][Math.floor(Math.random() * 6)];
-                let phraseElement = document.createElement('div');
-                phraseElement.classList.add('phrases-container', randomPos);
-                phraseElement.innerHTML = randomPhrase;
+            let phraseIndex = 0;
+            setInterval(() => {
+                const phrase = phrases[phraseIndex];
+                const phraseElement = document.createElement('div');
+                phraseElement.classList.add('phrases-container');
+                phraseElement.textContent = phrase;
                 document.getElementById('phrases').appendChild(phraseElement);
 
-                setTimeout(() => {
-                    phraseElement.style.opacity = 0;
-                }, 3000);
-            }
-
-            setInterval(showPhrase, 4000); // Cambiar cada 4 segundos
+                phraseIndex++;
+                if (phraseIndex >= phrases.length) phraseIndex = 0;
+            }, 3000); // Mostrar frases cada 3 segundos
         }
     </script>
 </body>
