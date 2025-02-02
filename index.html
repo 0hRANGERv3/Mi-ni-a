@@ -154,7 +154,7 @@
     <div class="song-page" id="songPage">
         <h1>🎶 Iniciar canción 🎶</h1>
         <button onclick="startSong()">Iniciar Canción</button>
-        <audio id="musicPlayer" class="hidden" controls autoplay loop>
+        <audio id="musicPlayer" class="hidden" controls loop>
             <source src="Tú ya Conoces Esta CANCIÓN tan linda_ Samba Paixão - Murart ft. RevnaAMVLetra sub Español.mp3" type="audio/mpeg">
             <source src="Tú ya Conoces Esta CANCIÓN tan linda_ Samba Paixão - Murart ft. RevnaAMVLetra sub Español.ogv" type="audio/ogg">
             Tu navegador no soporta el elemento de audio.
@@ -165,18 +165,18 @@
     <div class="container hidden" id="page1">
         <h1>✨ Te Adoro, mi niña linda ✨</h1>
         <p>No sabes lo mucho que te amo. Siempre alegras mis días y los vuelves increíbles.</p>
-        <div class="arrow" onclick="showNext()">⬇</div>
+        <div class="arrow" onclick="showNext('page2')">⬇</div>
     </div>
 
     <!-- Segunda Página -->
     <div class="container hidden" id="page2">
         <h1>💖 Por eso te vengo a preguntar... 💖</h1>
         <h2 style="color: #ff4e50; font-size: 2.5em; text-shadow: 3px 3px 10px rgba(255, 78, 80, 0.5); font-family: 'Lobster', cursive;">¿Quieres ser mi San Valentín? 💘</h2>
-        <button onclick="showFinal()">Sí (No se acepta un no como respuesta) 💖</button>
+        <button onclick="showNext('finalPage')">Sí (No se acepta un no como respuesta) 💖</button>
     </div>
 
     <!-- Página Final -->
-    <div class="container hidden final" id="finalPage">
+    <div class="container hidden" id="finalPage">
         <h1>✨ Soy muy afortunado de tenerte en mi vida ✨</h1>
         <p>No sabes lo mucho que te quiero. Eres una de las cosas más lindas que me han pasado y siempre agradeceré al destino por ponerte en mi camino.</p>
         <p>💖 Te amo, mi princesa linda. Nunca dudes de eso. 💖</p>
@@ -206,20 +206,15 @@
             }, 500);
         }
 
-        function showNext() {
-            document.getElementById('page1').classList.add('hidden');
-            setTimeout(() => {
-                document.getElementById('page2').classList.remove('hidden');
-            }, 500);
-        }
+        function showNext(pageId) {
+            // Ocultar la página actual
+            const currentPage = document.querySelector('.container:not(.hidden)');
+            if (currentPage) {
+                currentPage.classList.add('hidden');
+            }
 
-        function showFinal() {
-            document.getElementById('page2').classList.add('hidden');
-            setTimeout(() => {
-                document.getElementById('finalPage').classList.remove('hidden');
-                showHearts(); // Llamamos a la función de corazones después de que cambia a la tercera parte
-                startPhrases(); // Empezamos a mostrar las frases
-            }, 500);
+            // Mostrar la siguiente página
+            document.getElementById(pageId).classList.remove('hidden');
         }
 
         function showHearts() {
